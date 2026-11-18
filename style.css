@@ -1,0 +1,366 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #f1f5f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.todo-container {
+    width: 100%;
+    max-width: 500px;
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #334155;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: #f8fafc;
+}
+
+.todo-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+#task-input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: #f1f5f9;
+    font-size: 15px;
+    outline: none;
+}
+
+#task-input:focus {
+    border-color: #60a5fa;
+}
+
+#add-task-btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #3b82f6;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#add-task-btn:hover {
+    background: #2563eb;
+}
+
+#add-task-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #475569;
+    transform: none;
+}
+
+#task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (max-width: 480px) {
+    .todo-container {
+        padding: 22px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    #add-task-btn {
+        padding: 12px;
+    }
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+}
+
+.task-text {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #94a3b8;
+}
+
+.task-item.completed {
+    opacity: 0.75;
+}
+
+.task-text:hover {
+    color: #60a5fa;
+}
+
+.delete-btn {
+    border: none;
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: #ef4444;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+}
+
+.todo-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    background: #0f172a;
+    color: #94a3b8;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    border-color: #60a5fa;
+    color: #f1f5f9;
+}
+
+.filter-btn.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: #ffffff;
+}
+
+#task-counter {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+#empty-state {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+    padding: 20px 10px;
+}
+
+#clear-completed-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    background: #334155;
+    color: #f1f5f9;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#clear-completed-btn:hover {
+    background: #475569;
+}
+
+button:focus-visible,
+#task-input:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+}
+
+@media (max-width: 380px) {
+    .todo-container {
+        padding: 16px;
+    }
+
+    .todo-filters {
+        gap: 5px;
+    }
+
+    .filter-btn {
+        padding: 9px 5px;
+        font-size: 12px;
+    }
+
+    #task-input {
+        font-size: 14px;
+    }
+
+    #add-task-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .task-item {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .delete-btn {
+        padding: 7px 8px;
+        font-size: 12px;
+    }
+}
+
+@keyframes taskFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-item {
+    animation: taskFadeIn 1.2s ease;
+}
+
+#add-task-btn {
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#add-task-btn:active {
+    transform: scale(0.90);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+.task-date {
+    font-size: 11px;
+    color: #94a3b8;
+    white-space: nowrap;
+    margin-left: 8px;
+}
+
+.task-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 5px;
+}
+
+.task-date {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-left: 0;
+    white-space: normal;
+}
+
+.edit-input {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #60a5fa;
+    border-radius: 8px;
+    background: #1e293b;
+    color: #f1f5f9;
+    font-size: 14px;
+    outline: none;
+}
+
+.save-btn,
+.cancel-btn {
+    padding: 9px 12px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.save-btn {
+    background: #16a34a;
+}
+
+.save-btn:hover {
+    background: #15803d;
+}
+
+.cancel-btn {
+    background: #64748b;
+}
+
+.cancel-btn:hover {
+    background: #475569;
+}
+
+.edit-btn {
+    padding: 9px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #3b82f6;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.edit-btn:hover {
+    background: #2563eb;
+}
+
+.edit-btn:active {
+    transform: scale(0.96);
+}
+
